@@ -42,11 +42,6 @@ socket.on('spawn-count', function (data) {
 
     $("#instructions").replaceWith('<br><div class="input-group"><span class="input-group-addon" id="basic-addon1">UUID</span><input type="text" value="' + client_uuid + '" readonly class="form-control"</div>');
 
-
-//document.body.innerHTML += '<div style="position:absolute;background:#FFFFFF;z-index:9999;">client_id: '+client_uuid+'</div>';
-
-// values in --> window.agar
-
 function emitPosition(){      
   x = (mouseX - window.innerWidth / 2) / window.agar.drawScale + window.agar.rawViewport.x;
   y = (mouseY - window.innerHeight / 2) / window.agar.drawScale + window.agar.rawViewport.y;     
@@ -81,7 +76,7 @@ interval_id2 = setInterval(function() {
 }, 5000);
 
  
-//if key e is pressed do function split()
+
 document.addEventListener('keydown',function(e){
     var key = e.keyCode || e.which;
     if(key == 69){
@@ -89,7 +84,7 @@ document.addEventListener('keydown',function(e){
     }
 });
 
-//if key r is pressed do function eject()
+
 document.addEventListener('keydown',function(e){
     var key = e.keyCode || e.which;
     if(key == 82){
@@ -130,7 +125,7 @@ $("body").mousemove(function( event ) {
     window.agar.minScale = -30;
    }, 5000);
 
-//EXPOSED CODE BELOW
+
  
 var allRules = [
     { hostname: ["agar.io"],
@@ -310,7 +305,7 @@ if (document.readyState !== 'loading')
  
 var isFirefox = /Firefox/.test(navigator.userAgent)
  
-// Stage 1: Find corresponding rule
+
 var rules
 for (var i = 0; i < allRules.length; i++)
     if (allRules[i].hostname.indexOf(window.location.hostname) !== -1) {
@@ -321,16 +316,16 @@ if (!rules)
     return console.error("Expose: cant find corresponding rule")
  
  
-// Stage 2: Search for `main_out.js`
+
 if (isFirefox) {
     function bse_listener(e) { tryReplace(e.target, e) }
     window.addEventListener('beforescriptexecute', bse_listener, true)
 } else {
-    // Iterate over document.head child elements and look for `main_out.js`
+ 
     for (var i = 0; i < document.head.childNodes.length; i++)
         if (tryReplace(document.head.childNodes[i]))
             return
-    // If there are no desired element in document.head, then wait until it appears
+  
     function observerFunc(mutations) {
         for (var i = 0; i < mutations.length; i++) {
             var addedNodes = mutations[i].addedNodes
@@ -343,7 +338,7 @@ if (isFirefox) {
     observer.observe(document.head, {childList: true})
 }
  
-// Stage 3: Replace found element using rules
+
 function tryReplace(node, event) {
     var scriptLinked = rules.scriptUriRe && rules.scriptUriRe.test(node.src)
     var scriptEmbedded = rules.scriptTextRe && rules.scriptTextRe.test(node.textContent)
@@ -436,7 +431,7 @@ function tryReplace(node, event) {
             mod.text = this.responseText
             rules.replace(mod)
             script.textContent = mod.get()
-            // `main_out.js` should not executed before jQuery was loaded, so we need to wait jQuery
+   
             function insertScript(script) {
                 if (typeof jQuery === "undefined")
                     return setTimeout(insertScript, 0, script)
