@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         agar-feeder-bot
+// @name         d-bots-client
 // @namespace    http://github.com/davidmann4/
 // @version      0.01
 // @description  to be writen
