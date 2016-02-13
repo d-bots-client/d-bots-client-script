@@ -29,7 +29,9 @@ socket.on('spawn-count', function (data) {
     bot_counter = data.count;
     console.log("Bot Count: " + data.count + "/");
 });
-
+socket.on('bots-found', function(data) {
+    console-log('Found ' + data.count + ' Bots for your client_uuid and password !');
+});
 
     $("#instructions").replaceWith('<br><div class="input-group"><span class="input-group-addon" id="basic-addon1">UUID</span><input type="text" value="' + client_uuid + '" readonly class="form-control"</div>');
 
