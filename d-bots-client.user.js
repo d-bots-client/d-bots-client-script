@@ -25,15 +25,7 @@ var bot_counter = 0;
 var socket = io.connect('ws://127.0.0.1:8081'); // will change soon
 last_transmited_game_server = null;
 
-   
-socket.on('force-login', function(data) {
-    socket.emit('login', {
-        "client_uuid" : client_uuid,
-        "password" : password,
-        "type" : "client"
-    });
-    transmit_game_server();
-});
+
 socket.on('spawn-count', function (data) {
     bot_counter = data.count;
     console.log("Bot Count: " + data.count + "/");
@@ -91,10 +83,14 @@ document.addEventListener('keydown',function(e){
         emitMassEject();
     }
 });
-document.addEventListener('keydown',function(e){
+document.addEventListener('keydown',function(e){ // press f to connect your bots
     var key = e.keyCode || e.which;
     if(key == 70){
-        socket.emit('client-login', "test");
+        socket.emit('login', {
+           "type" : "client",
+           "client_uuid" : client_uuid,
+           "password" : password
+        });
     }
 });
     
