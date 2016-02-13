@@ -38,7 +38,7 @@ socket.on('bots-found', function(data) {
 function emitPosition(){      
   x = (mouseX - window.innerWidth / 2) / window.agar.drawScale + window.agar.rawViewport.x;
   y = (mouseY - window.innerHeight / 2) / window.agar.drawScale + window.agar.rawViewport.y;     
-
+  console.log(x + 'x   ,   y' + y);
   socket.emit("pos", {
       "x": x, 
       "y": y,
