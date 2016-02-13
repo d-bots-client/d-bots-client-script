@@ -60,16 +60,6 @@ function emitMassEject(){
   });    
 }
 
-interval_id = setInterval(function() {
-   emitPosition();
-}, 100);
-
-interval_id2 = setInterval(function() {
-   transmit_game_server_if_changed();
-}, 5000);
-
- 
-
 document.addEventListener('keydown',function(e){
     var key = e.keyCode || e.which;
     if(key == 69){
@@ -87,11 +77,20 @@ document.addEventListener('keydown',function(e){
 document.addEventListener('keydown',function(e){ // press f to connect your bots
     var key = e.keyCode || e.which;
     if(key == 70){
+        f = true;
         socket.emit('login', {
            "type" : "client",
            "client_uuid" : client_uuid,
            "password" : password
         });
+        transmit_game_server(); 
+        interval_id2 = setInterval(function() {
+            transmit_game_server_if_changed();
+        }, 5000);
+        interval_id1 = setInterval(function() {
+            emitPosition();
+        }, 125);
+       
     }
 });
     
