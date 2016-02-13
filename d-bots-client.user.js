@@ -15,12 +15,11 @@
 
 setTimeout(function() {
 
-var password = 'Password'; // ENTER HERE YOU'RE PASSWORD
-var client_uuid = '3';   // ENTER HERE YOU'RE CLIENT-ID
+var password = 'david'; // ENTER HERE YOU'RE PASSWORD
+var client_uuid = '8';   // ENTER HERE YOU'RE CLIENT-ID
 
 
 
-var logins = 0;        
 var bot_counter = 0;
 var socket = io.connect('ws://127.0.0.1:8081'); // will change soon
 last_transmited_game_server = null;
