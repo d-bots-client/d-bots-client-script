@@ -22,7 +22,7 @@ var party = '';
 
 var bot_counter = 0;
 var socket = io.connect('ws://127.0.0.1:8081'); // will change soon
-last_transmited_game_server = null;
+
 
 
 socket.on('spawn-count', function (data) {
