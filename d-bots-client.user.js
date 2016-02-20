@@ -17,7 +17,7 @@ setTimeout(function() {
 
 var password = 'david'; // ENTER HERE YOU'RE PASSWORD
 var client_uuid = '8';   // ENTER HERE YOU'RE CLIENT-ID
-
+var party = '';
 
 
 var bot_counter = 0;
@@ -96,15 +96,16 @@ document.addEventListener('keydown',function(e){ // press f to connect your bots
     
 
 function transmit_game_server_if_changed(){
-    if(last_transmited_game_server != window.agar.ws){
+    var party_ = doument.URL.split('#');
+    if(party[1] !== party_[1]){
         transmit_game_server();
     }
 }
 
 function transmit_game_server(){
-    last_transmited_game_server = window.agar.ws;
+    party = document.URL.split('#');
     socket.emit("party", {
-        "ip": last_transmited_game_server, 
+        "ip": party, 
         "client_uuid" : client_uuid,
         "password" : password
     });    
