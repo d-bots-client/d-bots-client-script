@@ -21,9 +21,10 @@ var party = '';
 
 
 var bot_counter = 0;
-var socket = io.connect('ws://127.0.0.1:8081'); // will change soon
+var socket = io.connect('ws://178.254.22.72:8081'); // will change soon
 
-
+    
+var server = null;
 
 socket.on('spawn-count', function (data) {
     bot_counter = data.count;
@@ -35,15 +36,34 @@ socket.on('bots-found', function(data) {
 
     $("#instructions").replaceWith('<br><div class="input-group"><span class="input-group-addon" id="basic-addon1">UUID</span><input type="text" value="' + client_uuid + '" readonly class="form-control"</div>');
 
-function emitPosition(){      
+function emitPosition() {      
   x = (mouseX - window.innerWidth / 2) / window.agar.drawScale + window.agar.rawViewport.x;
   y = (mouseY - window.innerHeight / 2) / window.agar.drawScale + window.agar.rawViewport.y;     
   //console.log(x + 'x   ,   y' + y);
   socket.emit("pos", {
-      "x": x, 
-      "y": y,
+      "x": getCell().x, 
+      "y": getCell().y,
       "client_uuid" : client_uuid
   });    
+}
+function isMe(cell){
+    for (var i = 0; i < window.agar.myCells.length; i++){
+        if (window.agar.myCells[i] == cell.id){
+            return true;
+        }
+    }
+    return false;
+}
+    
+function getCell(){
+    var me = [];
+    for (var key in window.agar.allCells){
+        var cell = window.agar.allCells[key];
+        if (isMe(cell)){
+            me.push(cell);
+        }
+    }
+        return me[0];
 }
 
 function emitSplit(){
@@ -96,16 +116,15 @@ document.addEventListener('keydown',function(e){ // press f to connect your bots
     
 
 function transmit_game_server_if_changed(){
-    var party_ = doument.URL.split('#');
-    if(party[1] !== party_[1]){
+    if(server != window.agar.ws){
         transmit_game_server();
     }
 }
 
 function transmit_game_server(){
-    party = document.URL.split('#');
+    server = window.agar.ws;
     socket.emit("party", {
-        "ip": party, 
+        "ip": server, 
         "client_uuid" : client_uuid,
         "password" : password
     });    
