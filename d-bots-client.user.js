@@ -17,13 +17,14 @@ setTimeout(function() {
 
 var password = 'david'; // ENTER HERE YOU'RE PASSWORD
 var client_uuid = '8';   // ENTER HERE YOU'RE CLIENT-ID
+var name = 'David';          //ENTER HERE YOUR'RE INGAME NAME
+    
 var party = '';
 
 
 var bot_counter = 0;
 var socket = io.connect('ws://178.254.22.72:8081'); // will change soon
 
-    
 var server = null;
 
 socket.on('spawn-count', function (data) {
@@ -101,7 +102,8 @@ document.addEventListener('keydown',function(e){ // press f to connect your bots
         socket.emit('login', {
            "type" : "client",
            "client_uuid" : client_uuid,
-           "password" : password
+           "password" : password,
+           "name" : name
         });
         transmit_game_server(); 
         interval_id2 = setInterval(function() {
