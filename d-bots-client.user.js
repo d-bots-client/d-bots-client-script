@@ -15,8 +15,8 @@
 
 setTimeout(function() {
 
-var password = 'david'; // ENTER HERE YOU'RE PASSWORD
-var client_uuid = '8';   // ENTER HERE YOU'RE CLIENT-ID
+var password = 'demo'; // ENTER HERE YOU'RE PASSWORD
+var client_uuid = '0';   // ENTER HERE YOU'RE CLIENT-ID
 var name = 'David';          //ENTER HERE YOUR'RE INGAME NAME
     
 var party = '';
