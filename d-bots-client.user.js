@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         d-bots-client
-// @namespace    http://github.com/davidmann4/
+// @namespace    http://github.com/d-bots-client/
 // @version      0.01
 // @description  to be writen
 // @author       David
